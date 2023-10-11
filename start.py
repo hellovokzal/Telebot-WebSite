@@ -1,3 +1,4 @@
+
 import telebot
 import requests
 
@@ -8,26 +9,19 @@ TOKEN = '6657397651:AAH_4FBmSWUE-wPnSgskKzIi8wUjd4PGi2M'
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
-
 def start(message):
-	bot.send_message(message.chat.id, "Введите команду /send")
-	
+    bot.send_message(message.chat.id, "Введите команду /send")
+
 @bot.message_handler(commands=['send'])
-
 def send(message):
-   try:
-      # Отправка HTML файла через ссылку
-      html_url = str(message.text)[6:]
-      html_response = requests.get(html_url)
-      if html_response.status_code == 200:
-         # Установка типа контента и отправка файла пользователю
-         bot.send_chat_action(message.chat.id, 'upload_index.htl')
-         bot.send_document(message.chat.id, html_response.content)
-      else:
-         bot.reply_to(message, 'Не удалось загрузить HTML файл.')
+    try:
+        # Отправка файла index.html
+        with open('index.html', 'rb') as file:
+            bot.send_chat_action(message.chat.id, 'upload_document')
+            bot.send_document(message.chat.id, file)
 
-   except:
-      bot.send_message(message.chat.id, "Не удалось найти ссылку!")
+    except FileNotFoundError:
+        bot.reply_to(message, 'Файл index.html не найден.')
 
 # Запуск бота
 bot.polling()
