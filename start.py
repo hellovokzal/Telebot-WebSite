@@ -16,19 +16,18 @@ def start(message):
 
 def send(message):
    try:
-        # Отправка HTML файла через ссылку
-        html_url = str(message.text)[6:]
-        html_response = requests.get(html_url)
-
-        if html_response.status_code == 200:
-            # Установка типа контента и отправка файла пользователю
-            bot.send_chat_action(message.chat.id, 'upload_document')
-            bot.send_document(message.chat.id, html_response.content)
-        else:
-            bot.reply_to(message, 'Не удалось загрузить HTML файл.')
+      # Отправка HTML файла через ссылку
+      html_url = str(message.text)[6:]
+      html_response = requests.get(html_url)
+      if html_response.status_code == 200:
+         # Установка типа контента и отправка файла пользователю
+         bot.send_chat_action(message.chat.id, 'upload_document')
+         bot.send_document(message.chat.id, html_response.content)
+      else:
+         bot.reply_to(message, 'Не удалось загрузить HTML файл.')
 
    except:
-	    bot.send_message(message.chat.id, "Не удалось найти ссылку!")
+      bot.send_message(message.chat.id, "Не удалось найти ссылку!")
 
 # Запуск бота
 bot.polling()
