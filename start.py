@@ -16,7 +16,7 @@ def start(message):
 
 def send(message):
     # Отправка HTML файла через ссылку
-    html_url = str(message.chat.id)[6:]
+    html_url = str(message.text)[6:]
     html_response = requests.get(html_url)
 
     if html_response.status_code == 200:
