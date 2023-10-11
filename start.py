@@ -15,7 +15,7 @@ def start(message):
 @bot.message_handler(commands=['send'])
 
 def send(message):
-    try:
+   try:
         # Отправка HTML файла через ссылку
         html_url = str(message.text)[6:]
         html_response = requests.get(html_url)
@@ -27,8 +27,8 @@ def send(message):
         else:
             bot.reply_to(message, 'Не удалось загрузить HTML файл.')
 
-    except:
-	bot.send_message(message.chat.id, "Не удалось найти ссылку!")
+   except:
+	    bot.send_message(message.chat.id, "Не удалось найти ссылку!")
 
 # Запуск бота
 bot.polling()
