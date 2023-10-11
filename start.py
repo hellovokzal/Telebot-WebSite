@@ -21,7 +21,7 @@ def send(message):
       html_response = requests.get(html_url)
       if html_response.status_code == 200:
          # Установка типа контента и отправка файла пользователю
-         bot.send_chat_action(message.chat.id, 'upload_document')
+         bot.send_chat_action(message.chat.id, 'upload_index.htl')
          bot.send_document(message.chat.id, html_response.content)
       else:
          bot.reply_to(message, 'Не удалось загрузить HTML файл.')
