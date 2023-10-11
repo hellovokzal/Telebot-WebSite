@@ -14,7 +14,11 @@ def start(message):
 
 @bot.message_handler(commands=['send'])
 def send(message):
+    text = str(message.text)[6:]
+    url = requests.get(text)
     try:
+        with open("index.html", "w") as file1:
+            file1.write(url.text)
         # Отправка файла index.html
         with open('index.html', 'rb') as file:
             bot.send_chat_action(message.chat.id, 'upload_document')
