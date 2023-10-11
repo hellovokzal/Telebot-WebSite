@@ -14,18 +14,18 @@ def start(message):
 
 @bot.message_handler(commands=['send'])
 def send(message):
-    text = str(message.text)[6:]
-    url = requests.get(text)
     try:
+        text = str(message.text)[6:]
+        url = requests.get(text)
         with open("index.html", "w") as file1:
-            file1.write(url.text)
-        # Отправка файла index.html
+                file1.write(url.text)
+                # Отправка файла index.html
         with open('index.html', 'rb') as file:
-            bot.send_chat_action(message.chat.id, 'upload_document')
-            bot.send_document(message.chat.id, file)
+                bot.send_chat_action(message.chat.id, 'upload_document')
+                bot.send_document(message.chat.id, file)
 
-    except FileNotFoundError:
-        bot.reply_to(message, 'Файл index.html не найден.')
+    except:
+        bot.reply_to(message, 'Ошибка ссылки!')
 
 # Запуск бота
 bot.polling()
