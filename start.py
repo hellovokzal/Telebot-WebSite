@@ -15,20 +15,7 @@ def start(message):
 def echo(message):
     text1 = str(message.text)[0:8]
     text2 = str(message.text)[0:7]
-    if text1 == "https://":
-        try:
-            text = str(message.text)[6:]
-            url = requests.get(text)
-            with open("index.html", "w") as file1:
-                    file1.write(url.text)
-                    # Отправка файла index.html
-            with open('index.html', 'rb') as file:
-                    bot.send_chat_action(message.chat.id, 'upload_document')
-                    bot.send_document(message.chat.id, file)
-
-        except:
-            bot.reply_to(message, 'Ошибка ссылки!')
-    elif text2 == "http://":
+    if text1 == "https://" or text2 == "http://":
         try:
             text = str(message.text)[6:]
             url = requests.get(text)
