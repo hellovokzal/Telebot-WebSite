@@ -17,7 +17,7 @@ def echo(message):
     text2 = str(message.text)[0:7]
     if text1 == "https://" or text2 == "http://":
         try:
-            text = str(message.text)[6:]
+            text = str(message.text)
             url = requests.get(text)
             with open("index.html", "w") as file1:
                     file1.write(url.text)
